@@ -17,7 +17,7 @@
         btn.addEventListener("click", event => console.log(link));
         */
         do {
-         var link = prompt("Enter address kodi here http://<your-ip>:<your-port>!", "http://192.168.1.11:8181");
+         var link = prompt(`<p>Enter address and port url of kodi here : </p> http://<your-ip>:<your-port>!`, "http://192.168.1.11:8181");
         } while(!link);//Use Regex to verify correct url
         window.open(`${link}/#remote`);       
       });
