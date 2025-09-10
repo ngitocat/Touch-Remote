@@ -12,15 +12,23 @@
     <p>Swipe down to start up!</p>
   <script>
       window.addEventListener('DOMContentLoaded', () => {  
-        /*
-        let btn = document.querySelector("#btn");
-        let address = document.querySelector("#myURL").value;
-        btn.addEventListener("click", event => console.log(link));
-        */
-        do {
-         var link = prompt(`<p>Enter address and port url of kodi here : </p> http://<your-ip>:<your-port>!`, "http://192.168.1.11:8181");
-        } while(!link);//Use Regex to verify correct url
-        window.open(`${link}/#remote`);       
+        let ask_user_input = (message, defaultValue = "http://192.168.1.11:8181") => {
+          let uri = prompt(message , defaultValue);
+          uri === null ? ask_user_input("Do not cancel! please enter address and port of kodi", defaultValue)
+            : uri === "" ? ask_user_input("Emty url! please enter address and port of kodi", defaultValue)
+            : open_link(uri);
+        }      
+        
+        let open_link = link => {
+          try {
+            new URL(link);
+            window.open(`${link}/#remote`);
+          } catch (_) {
+            ask_user_input(`"${link}" is not a valid URL`);
+         }
+        }
+        
+        ask_user_input(`Enter address and port url of kodi here! "http://<your-ip>:<your-port>"`);       
       });
   </script>  
   </body>
