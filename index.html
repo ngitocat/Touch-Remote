@@ -14,22 +14,22 @@
       window.addEventListener('DOMContentLoaded', () => {  
         let ask_user_input = (message, defaultValue = "http://192.168.1.11:8181") => {
           let uri = prompt(message , defaultValue);
-          uri === null ? ask_user_input("Do not cancel! please enter address and port of kodi", defaultValue)
-            : uri === "" ? ask_user_input("Emty url! please enter address and port of kodi", defaultValue)
+          uri === null ? ask_user_input("Please, do not cancel! Enter address ip of kodi and port required is 8181", defaultValue)
+            : uri === "" ? ask_user_input("Emty url! Please enter address ip of kodi and port required is 8181", defaultValue)
             : open_link(uri);
         }      
         
         let open_link = link => {
           try {
-            new URL(link);
-            window.open(`${link}/#remote`);
+            let url = new URL(link);
+            url.port === "8181" ? window.open(`${link}/#remote`) : ask_user_input(`"${url.port}" is not a valid port`);
           } catch (_) {
             ask_user_input(`"${link}" is not a valid URL`);
          }
         }
         
-        ask_user_input(`Enter address and port url of kodi here! "http://<your-ip>:<your-port>"`);       
+        ask_user_input(`Enter address ip of kodi here and port required is 8181! "http://<your-ip>:8181"`);
       });
-  </script>  
+  </script> 
   </body>
 </html>
