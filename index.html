@@ -21,16 +21,16 @@
          }
         }
         
-        let ask_ip = (message = "Enter your address IP of kodi here ", defaultValue = "Example IP : 192.168.1.11") => {
+        let ask_ip = (message = "Enter your address IP of kodi here! Example IP : 192.168.1.11", defaultValue = "192.168.1.11") => {
           let ip = prompt(message, defaultValue);
-          (ip === null) || (ip === ``) || ip.includes("Example") ? ask_ip(`Your IP is not a valid Address! Please enter address ip of kodi`, defaultValue)
+          (ip === null) || (ip === ``) || ip.includes("Example") ? ask_ip(`Your IP is not a valid Address! Please enter address ip of kodi, example ip 192.168.1.11`, defaultValue)
             : ask_port(ip);            
           console.log(ip);
         }
         
-        let ask_port = (address, message = "Enter your PORT of kodi here ", defaultValue = "Example Port : 8181") => {
+        let ask_port = (address, message = "Enter your PORT of kodi here! Example Port : 8181", defaultValue = "8181") => {
           let port = prompt(message, defaultValue);
-          (port === null) || (port === ``) || port.includes("Example") || isNaN(port) ? ask_port(address, `Your PORT is not a number! Please enter address ip of kodi`, defaultValue) : open_link(`http://${address}:${port}`);
+          (port === null) || (port === ``) || port.includes("Example") || isNaN(port) ? ask_port(address, `Your PORT is not a number! Please enter your PORT of kodi, example port 8181`, defaultValue) : open_link(`http://${address}:${port}`);
           console.log(`http://${address}:${port}`);          
         }
         
