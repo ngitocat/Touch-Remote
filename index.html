@@ -12,23 +12,29 @@
     <p>Swipe down to start up!</p>
   <script>
       window.addEventListener('DOMContentLoaded', () => {  
-        let ask_user_input = (message, defaultValue = "http://<your-ip>:<your-port>") => {
-          let uri = prompt(message , defaultValue);
-          uri === null ? ask_user_input("Please, do not cancel! Enter address ip and port of kodi", defaultValue)
-            : uri === "" ? ask_user_input("Emty url! Please enter address ip and port of kodi", defaultValue)
-            : open_link(uri);
-        }      
-        
         let open_link = link => {
           try {
             let url = new URL(link);
-            url.port === "" ? ask_user_input(`Empty port! Please enter your port`) : window.open(`${link}/#remote`);
+            window.open(`${link}/#remote`);
           } catch (_) {
-            ask_user_input(`"${link}" is not a valid URL! Enter address ip and port of kodi`);
+            ask_ip(`"${link}" is not a valid URL! Enter address ip and port of kodi`);
          }
         }
         
-        ask_user_input(`Enter address ip and port of kodi here please! example http://192.168.1.11:8181`);
+        let ask_ip = (message = "Enter your address IP of kodi here ", defaultValue = "Example IP : 192.168.1.11") => {
+          let ip = prompt(message, defaultValue);
+          (ip === null) || (ip === ``) || ip.includes("Example") ? ask_ip(`Your IP is not a valid Address! Please enter address ip of kodi`, defaultValue)
+            : ask_port(ip);            
+          console.log(ip);
+        }
+        
+        let ask_port = (address, message = "Enter your PORT of kodi here ", defaultValue = "Example Port : 8181") => {
+          let port = prompt(message, defaultValue);
+          (port === null) || (port === ``) || port.includes("Example") || isNaN(port) ? ask_port(address, `Your PORT is not a number! Please enter address ip of kodi`, defaultValue) : open_link(`http://${address}:${port}`);
+          console.log(`http://${address}:${port}`);          
+        }
+        
+        ask_ip();
       });
   </script> 
   </body>
